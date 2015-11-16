@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 def main(url):
     html = urllib.request.urlopen(url).read()
-    soupPage = BeautifulSoup(html)
+    soupPage = BeautifulSoup(html, "lxml")
     tags = soupPage('a')
     for i in tags:
         print (i.get('href', None))
