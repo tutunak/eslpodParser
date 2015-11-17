@@ -1,6 +1,7 @@
 import urllib.request
 import sys
 from bs4 import BeautifulSoup
+import re
 
 
 def main(url):
@@ -8,7 +9,9 @@ def main(url):
     soupPage = BeautifulSoup(html, "lxml")
     tags = soupPage('a')
     for i in tags:
-        print (i.get('href', None))
+        link = i.get('href', None)
+        if (re.match("^http.+mp3$", link)) != None:
+            print(link)
 
 
 if __name__ == '__main__':
