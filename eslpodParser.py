@@ -8,8 +8,8 @@ def main(url):
     html = urllib.request.urlopen(url).read()
     soupPage = BeautifulSoup(html, "lxml")
     tags = soupPage('a')
-    for i in tags:
-        link = i.get('href', None)
+    for tag in tags:
+        link = tag.get('href', None)
         if (re.match("^http.+mp3$", link)) != None:
             print(link)
 
