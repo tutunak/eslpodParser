@@ -16,12 +16,16 @@ def main(url):
         site = reSite.group(1)
         prevUrl = url
         for tag in tags:
+            fileList = open ('fileList.txt', 'a')
             link = tag.get('href', None)
             if (re.match("^http.+mp3$", link)) != None:
                 logging.info(link)
+                fileList.write(link)
+                fileList.write("\n")
                 print(link)
             elif (tag.contents[0] == "next"):
                 url = site + link
+            fileList.close()
         logging.info(url)
         print(url)
         if prevUrl == url:
@@ -29,7 +33,7 @@ def main(url):
         logging.info('Pause 10 second')
         print("Pause 10 second")
         time.sleep(10)
-
+    feliList.close()
 if __name__ == '__main__':
     url = "https://www.eslpod.com/website/show_all.php"
     main(url)
