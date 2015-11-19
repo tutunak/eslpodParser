@@ -1,9 +1,12 @@
 import urllib.request
 from bs4 import BeautifulSoup
+from os import listdir
+from os.path import isfile, join
 import re
 
 
-FILES_PATH = "~/"
+
+FILES_PATH = "/tmp/eslpodtest"
 
 
 
@@ -22,9 +25,10 @@ def main(url, lastCount):
 
 
 def check_files(linkList):
-    files = []
     for link in linkList:
         print(re.search("^.+\/(.+mp3$)", link).group(1))
+    files = [f for f in listdir(FILES_PATH) if isfile(join(FILES_PATH, f))]
+    print(files)
 
 
 if __name__ == '__main__':
