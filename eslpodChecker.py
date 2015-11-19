@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup
 import re
 
 
+FILES_PATH = "~/"
+
+
+
 def main(url, lastCount):
     linkList = []
     html = urllib.request.urlopen(url).read()
@@ -14,6 +18,14 @@ def main(url, lastCount):
             linkList.append(link)
             print(link)
         if len(linkList) >= lastCount: break
+    check_files(linkList)
+
+
+def check_files(linkList):
+    files = []
+    for link in linkList:
+        print(re.search("^.+\/(.+mp3$)", link).group(1))
+
 
 if __name__ == '__main__':
     url = "https://www.eslpod.com/website/show_all.php"
