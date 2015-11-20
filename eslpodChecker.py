@@ -26,7 +26,6 @@ def main(url, lastCount):
 
 def check_files(linkList):
     files = [f for f in listdir(FILES_PATH) if isfile(join(FILES_PATH, f))]
-    #print(files)
     fne = {}
     for link in linkList:
         filename = re.search("^.+\/(.+mp3$)", link).group(1)
@@ -37,9 +36,9 @@ def check_files(linkList):
 
 
 def files_download(download_list):
-    exit
-
-
+    for key in download_list:
+        urllib.request.urlretrieve(download_list[key], FILES_PATH+"/"+key)
+   
 
 if __name__ == '__main__':
     url = "https://www.eslpod.com/website/show_all.php"
