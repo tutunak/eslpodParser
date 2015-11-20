@@ -27,15 +27,19 @@ def main(url, lastCount):
 def check_files(linkList):
     files = [f for f in listdir(FILES_PATH) if isfile(join(FILES_PATH, f))]
     #print(files)
-    fne = []
+    fne = {}
     for link in linkList:
         filename = re.search("^.+\/(.+mp3$)", link).group(1)
         if filename  not in files:
             print("file not exist ", filename)
-            fne.append()
+            fne[filename] = link
     files_download(fne)
 
-def files_download(download_list)
+
+def files_download(download_list):
+    exit
+
+
 
 if __name__ == '__main__':
     url = "https://www.eslpod.com/website/show_all.php"
