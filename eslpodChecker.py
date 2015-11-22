@@ -4,14 +4,13 @@ from os import listdir
 from os.path import isfile, join
 from os import remove
 import re
-
-
+import logging
 
 FILES_PATH = "/tmp/eslpodtest"
-
-
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%YY %I:%M:%S %p', filename='eslcheck.log', level=logging.INFO)
 
 def main(url, lastCount):
+    logging.info('Started')
     linkList = []
     html = urllib.request.urlopen(url).read()
     soupPage = BeautifulSoup(html, "lxml")
@@ -20,7 +19,7 @@ def main(url, lastCount):
         link = tag.get('href', None)
         if (re.match("^http.+mp3$", link)) != None:
             linkList.append(link)
-            print(link)
+            #print(link)
         if len(linkList) >= lastCount: break
     check_files(linkList)
 
@@ -32,17 +31,18 @@ def check_files(linkList):
     for link in linkList:
         filename = re.search("^.+\/(.+mp3$)", link).group(1)
         if filename  not in files:
-            print("file not exist ", filename)
+            logging.info("found new file: " + filename)
+            #print("file not exist ", filename)
             fne[filename] = link
         all_files[filename] = link
     files_download(fne)
-    delete_old(files, all_files)
+#    delete_old(files, all_files)
 
 
 def files_download(download_list):
     for key in download_list:
         urllib.request.urlretrieve(download_list[key], FILES_PATH+"/"+key)
-
+        logging.info("downloaded file: " + download_list[key])
 
 def delete_old(files, download_list):
     for filename in files:
