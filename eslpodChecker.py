@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import urllib.request
 from bs4 import BeautifulSoup
 from os import listdir
@@ -6,8 +8,8 @@ from os import remove
 import re
 import logging
 
-FILES_PATH = "/tmp/eslpodtest"
-logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%YY %I:%M:%S %p', filename='eslcheck.log', level=logging.INFO)
+FILES_PATH = "/home/tutunak/manuals/english/eslpod"
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%YY %I:%M:%S %p', filename=FILES_PATH + '/eslcheck.log', level=logging.INFO)
 
 def main(url, lastCount):
     logging.info('Started')
